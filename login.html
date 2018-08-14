@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>login</title>
+</head>
+<body>
+	<div>
+		用户名：<input type="text" class='user'>
+		<br>
+		密码：<input type="text" class='pass'>
+		<br>
+		<input type="button" value='注册' class='res'>
+		<input type="button" value='登录' class='login'>
+	</div>
+	<script>
+	var res = document.querySelector('.res');
+	var login = document.querySelector('.login');
+	var user = document.querySelector('.user');
+	var pass = document.querySelector('.pass');
+	function ajax1(){
+		var xhr = new XMLHttpRequest();
+		xhr.open('get','http://localhost:2182/res?user='+user.value+'&pass='+pass.value,true);
+		xhr.send(null);
+		xhr.onreadystatechange = function(){
+			if(xhr.readyState===4){
+				if(xhr.status>=200&&xhr.status<300||xhr.status===304){
+					alert(xhr.responseText);
+				}
+			}
+		}
+	}
+	function ajax2(){
+		var xhr = new XMLHttpRequest();
+		xhr.open('get','http://localhost:2182/login?user='+user.value+'&pass='+pass.value,true);
+		xhr.send(null);
+		xhr.onreadystatechange = function(){
+			if(xhr.readyState===4){
+				if(xhr.status>=200&&xhr.status<300||xhr.status===304){
+					alert(xhr.responseText);
+				}
+			}
+		}
+	}
+	res.onclick = function(){
+		ajax1();
+	}
+	login.onclick = function(){
+		ajax2();
+	}
+	</script>
+</body>
+</html>
